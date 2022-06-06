@@ -26,12 +26,45 @@ const userSchema = mongoose.Schema({
 
 const User = new mongoose.model("User",userSchema)
 
+
 //Routes
 app.post("/login",(req,res) => {
     res.send("My API login")
 })
 app.post("/register",(req,res) => {
-    res.send("My API register")
+   console.log(req.body)
+//    console.log(mongoose.connection.readyState)
+
+
+   const {name ,email ,password} = req.body
+   User.findOne({email : email} , (err,user) =>{
+       if(user){
+           res.send({message:"user already registered"})
+       }
+           
+       else{
+       const user = new User({
+            name,
+            email,
+            password
+        })
+        
+        
+
+        user.save(err =>{
+            if(err){
+                console.log("error")
+                res.send(err)
+            }
+            else{
+                res.send({message : "Successfully Registered"})
+            }
+        })
+    }
+           
+      
+   })
+   
 })
 
 app.listen(9002 , () => {

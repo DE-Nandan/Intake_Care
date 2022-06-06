@@ -1,13 +1,14 @@
 import React from 'react'
 import './register.css'
 import { useState } from 'react'
+import axios from 'axios'
 const Register = () => {
 
     const [user , setUser] = useState({
         name: "",
         email:"",
         password:"",
-        reEnterPassword:"",
+        reEnterPassword:""
     })
 
     const handleChange = e => {
@@ -19,6 +20,20 @@ const Register = () => {
             [name] : value
         })
     }
+
+    const register = () => {
+        const {name ,email ,password,reEnterPassword} = user
+        if(name && email && password && password === reEnterPassword ){
+            // alert("posted")
+             axios.post("http://localhost:9002/register",user)
+             .then(res => console.log(res))
+            }
+        else
+        {
+            alert("invalid input")
+        }
+        
+    }
   return (
     <div className="register">
     {
@@ -29,7 +44,7 @@ const Register = () => {
     <input type="text" name = "email" value = {user.email} placeholder='Type your Email' onChange={handleChange}/>
     <input type="password" name = "password" value = {user.password} placeholder='Password'onChange={handleChange} />
     <input type="password" name = "reEnterPassword" value = {user.reEnterPassword} placeholder='Re-enter Password' onChange={handleChange} />
-    <div className="button">Register</div>
+    <div className="button" onClick={register}>Register</div>
      <div>or</div>
      <div className="button">Login</div>
 </div>
