@@ -29,7 +29,23 @@ const User = new mongoose.model("User",userSchema)
 
 //Routes
 app.post("/login",(req,res) => {
-    res.send("My API login")
+    const {email  ,password} = req.body
+    console.log(req.body)
+    User.findOne({email : email} , (err,user) =>{
+        if(user)
+        {
+           if(password === user.password)
+           res.send({message : "Login Sucessfull"  ,user})
+           else
+           {
+               res.send({message:"Password didnt match"})
+           }
+        }
+        else
+        {
+            res.send("User not registered")
+        }
+    })
 })
 app.post("/register",(req,res) => {
    console.log(req.body)
@@ -48,9 +64,6 @@ app.post("/register",(req,res) => {
             email,
             password
         })
-        
-        
-
         user.save(err =>{
             if(err){
                 console.log("error")
