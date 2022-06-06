@@ -7,8 +7,8 @@ function App() {
       
         <div className='App'>
       {/* <Homepage/> */}
-       {/* <Login/> */}
-      <Register/> 
+       <Login/>
+      {/* <Register/>  */}
       </div>
   );
 }
