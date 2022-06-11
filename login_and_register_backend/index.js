@@ -31,6 +31,7 @@ const User = new mongoose.model("User",userSchema)
 app.post("/login",(req,res) => {
     const {email  ,password} = req.body
     console.log(req.body)
+    // console.log(req.body.email)
     User.findOne({email : email} , (err,user) =>{
         if(user)
         {
@@ -48,7 +49,7 @@ app.post("/login",(req,res) => {
     })
 })
 app.post("/register",(req,res) => {
-   console.log(req.body)
+//    console.log(req.body)
 //    console.log(mongoose.connection.readyState)
 
 
@@ -70,7 +71,7 @@ app.post("/register",(req,res) => {
                 res.send(err)
             }
             else{
-                res.send({message : "Successfully Registered"})
+                res.send({message : "Successfully Registered , Please Login Now"})
             }
         })
     }
