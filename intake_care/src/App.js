@@ -10,7 +10,8 @@ function App() {
   // console.log(user.email)
   // console.log(user.password)
   const obj = user
-  console.log(user.email)
+  // console.log(user.email)
+  // console.log(user)
   return (
 
     <div className='App'>

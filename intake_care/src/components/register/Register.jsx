@@ -40,6 +40,12 @@ const Register = () => {
         }
         
     }
+    const keyPress =e => {
+        if(e.keyCode == 13){
+           console.log('value', e.target.value);
+           register();
+        }
+     }
   return (
     <div className="register">
     {
@@ -49,7 +55,7 @@ const Register = () => {
     <input type="text" name = "name" value = {user.name} placeholder='Type your name' onChange={ handleChange} />
     <input type="text" name = "email" value = {user.email} placeholder='Type your Email' onChange={handleChange}/>
     <input type="password" name = "password" value = {user.password} placeholder='Password'onChange={handleChange} />
-    <input type="password" name = "reEnterPassword" value = {user.reEnterPassword} placeholder='Re-enter Password' onChange={handleChange} />
+    <input type="password" name = "reEnterPassword" value = {user.reEnterPassword} placeholder='Re-enter Password' onChange={handleChange} onKeyDown={keyPress} />
     <div className="button" onClick={register}>Register</div>
      <div>or</div>
      <div className="button" onClick={() => navigate("/login") }>Login</div>
