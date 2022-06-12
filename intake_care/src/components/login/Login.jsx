@@ -53,9 +53,7 @@ const Login = ({setLoginUser}) => {
 
   return (
     <div className="container">
-    {/* {
-        console.log("User" , user)
-    } */}
+   
     <div className="login">
         <h2>&copy;Intake Care</h2>
         <br />
@@ -67,7 +65,7 @@ const Login = ({setLoginUser}) => {
          <div className="button" onClick={() => navigate("/register")} >Register</div>
     <h3 className='me'><a href="https://de-nandan.github.io/port_react/" target="_blank">&copy;de_nandan_</a></h3>
     </div>
-    </div>
+     </div>
   )
 }
 

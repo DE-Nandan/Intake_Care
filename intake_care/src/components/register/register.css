@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,500;1,300;1,500&display=swap');
-
+.container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    /* margin-top: 10%; */
+}
 .register{
     width: 400px;
+    margin-top: 7rem;
     /* background: white; */
     border: 1px solid burlywood;
     box-shadow:0 2px 4px rgb(0 0 0 / 10%) , 0 8px 16px rgb(0 0 0 / 10%);

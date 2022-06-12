@@ -47,6 +47,7 @@ const Register = () => {
         }
      }
   return (
+    <div className="container">
     <div className="register">
     {
         console.log("User",user)
@@ -59,6 +60,7 @@ const Register = () => {
     <div className="button" onClick={register}>Register</div>
      <div>or</div>
      <div className="button" onClick={() => navigate("/login") }>Login</div>
+</div>
 </div>
   )
 }
