@@ -1,13 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,500;1,300;1,500&display=swap');
 
 .register{
     width: 400px;
-    background: white;
-    border: 1px solid whitesmoke;
+    /* background: white; */
+    border: 1px solid burlywood;
     box-shadow:0 2px 4px rgb(0 0 0 / 10%) , 0 8px 16px rgb(0 0 0 / 10%);
     border-radius: 8px;
     padding: 1rem;
     align-items: center;
     text-align: center;
+    background-color: transparent;
+    color: rgb(171, 254, 176);
+    font-family: 'Poppins', sans-serif;
+   
+}
+.register >h1 {
+    background: rgb(174, 55, 55);
+    font-family: 'Poppins', sans-serif;
+}
+.register >h2 {
+    /* background: rgba(179, 64, 64, 0.699); */
+    font-family: 'Poppins', sans-serif;
+    background: black;
+  
+}
+.register >h3 {
+    /* background: rgba(179, 64, 64, 0.699); */
+    font-family: 'Poppins', sans-serif;
+    color: rgb(176, 251, 181);
+    background: rgb(189, 189, 77);
+}
+.me > a{
+    color: rgb(176, 251, 181);
 }
 
 .register > input {
@@ -21,8 +45,8 @@
     font-size: 1rem;
 }
 .register > .button{
-    background: blue;
-    border: 1px solid blue;
+    background: rgb(174,55,55);
+    border: 1px solid rgb(83, 26, 26);
     color: white;
     font-size: 1.25rem;
     padding: 0.5rem;
