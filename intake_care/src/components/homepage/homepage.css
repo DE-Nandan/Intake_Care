@@ -1,4 +1,4 @@
-/* 
+
 
 .homepage{
     display: flex;
@@ -9,12 +9,12 @@
     height: 100vh;
     border-radius: 20px;
     box-shadow: 0 0 15px 15px;
-    background : white;
-    position: relative;
+    background : red;
+   
     
     
 }
-
+/*
 .homepage > .button{
     background: blue;
     border: 1px solid blue;
