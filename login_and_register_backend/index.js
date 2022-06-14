@@ -30,7 +30,7 @@ const User = new mongoose.model("User",userSchema)
 //Routes
 app.post("/login",(req,res) => {
     const {email  ,password} = req.body
-    console.log(req.body)
+    // console.log(req.body)
     // console.log(req.body.email)
     User.findOne({email : email} , (err,user) =>{
         if(user)
