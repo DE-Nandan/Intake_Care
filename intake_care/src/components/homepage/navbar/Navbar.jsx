@@ -1,36 +1,38 @@
 import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
-
+import Logo from "../../../assets/favicon.ico"
+import { Link } from "react-router-dom";
 export default function Navbar({obj ,setLoginUser}) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="Nav">
-      <nav className="bg-gray-900">
+      <nav className="bg-neutral-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <img
                   className="h-8 w-8"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                  src={Logo}
                   alt="Workflow"
                 />
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <a
-                    href="#"
+                <p class="text-sky-400 text-lg">Hello,&nbsp;{obj.name}!</p>
+                  <Link
+                    to="/"
                     className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Dashboard
-                  </a>
+                  </Link>
 
-                  <a
-                    
+                  <Link
+                    to="/dash"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Team
-                  </a>
+                  </Link>
 
                   <a
                     href="#"
@@ -52,13 +54,18 @@ export default function Navbar({obj ,setLoginUser}) {
                   >
                     About
                   </a>
-                  <p class="text-sky-400  pl-12">	&nbsp;	&nbsp; 	&nbsp;	&nbsp;		&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;Welcome,&nbsp;{obj.name}!</p>
+              
+                  
+                  
+                  
                   <a
                     href="#"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={() => setLoginUser({})}
                   >
                     Sign Out
                   </a>
+                  
+                
                 </div>
               </div>
             </div>
@@ -160,7 +167,7 @@ export default function Navbar({obj ,setLoginUser}) {
                 
                   <a
                     href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={() => setLoginUser({})}
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onClick={() => setLoginUser({})}
                   >
                     Sign Out
                   </a>
@@ -170,20 +177,20 @@ export default function Navbar({obj ,setLoginUser}) {
         </Transition>
       </nav>
 
-      <header className="bg-white shadow">
+      {/* <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-gray-900">hola</h1>
         </div>
-      </header>
-      <main>
+      </header> */}
+      {/* <main>
         <div className="bg-white max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {obj.email}
           <div className="px-4 py-6 sm:px-0">
             <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">hi</div>
-          </div>
+          </div> */}
           {/* <!-- /End replace --> */}
-        </div>
-      </main>
+        {/* </div>
+      </main> */}
     </div>
     
   );
