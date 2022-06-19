@@ -1,0 +1,6 @@
+.Container{
+     display: flex;
+     margin-top: 15rem;
+     justify-content: center;
+     align-items: center; 
+}

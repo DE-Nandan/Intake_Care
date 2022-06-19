@@ -129,20 +129,20 @@ export default function Navbar({obj ,setLoginUser}) {
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <p class="text-sky-400 pl-3">Welcome,&nbsp;{obj.name}!</p>
-                <a
-                  href="#"
+                <Link
+                  to ="/"
                   className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Dashboard
-                </a>
+                </Link>
                 
 
-                <a
-                  href="#"
+                <Link
+                  to="/dash"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Team
-                </a>
+                </Link>
 
                 <a
                   href="#"
