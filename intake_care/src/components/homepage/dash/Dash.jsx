@@ -3,9 +3,9 @@ import Navbar from '../navbar/Navbar'
 import './dash.css'
 import { useState } from 'react'
 const Dash = ({obj,setLoginUser}) => {
-  const [height, setHeight] = useState(0);
-  const [mass, setMass] = useState(0);
-  const [bmi, setBmi] = useState(0);
+  const [height, setHeight] = useState();
+  const [mass, setMass] = useState();
+  const [bmi, setBmi] = useState();
 
   const calculate = (e) => {
     e.preventDefault();
@@ -39,10 +39,12 @@ const Dash = ({obj,setLoginUser}) => {
     <div className="Container">
     
     <div class="flex items-center justify-center block p-6 rounded-lg shadow-lg bg-white max-w-md">
-  <form>
+  <form onSubmit={calculate}>
     <div class="grid grid-cols-2 gap-4">
       <div class="form-group mb-6">
-        <input type="text" class="form-control
+      <label>Height:</label>
+        <input  value={height} onChange={(e) => setHeight(e.target.value)}
+        class="form-control
           block
           w-full
           px-3
@@ -57,10 +59,12 @@ const Dash = ({obj,setLoginUser}) => {
           ease-in-out
           m-0
           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123"
-          aria-describedby="emailHelp123" placeholder="First name"/>
+          aria-describedby="emailHelp123" placeholder="in m" />
       </div>
       <div class="form-group mb-6">
-        <input type="text" class="form-control
+      <label>Weight:</label>
+        <input  value={mass} onChange={(e) => setMass(e.target.value)}
+        class="form-control
           block
           w-full
           px-3
@@ -74,9 +78,10 @@ const Dash = ({obj,setLoginUser}) => {
           transition
           ease-in-out
           m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput124"
-          aria-describedby="emailHelp124" placeholder="Last name"/>
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123"
+          aria-describedby="emailHelp123" placeholder="in Kg" />
       </div>
+      
     </div>
     <div class="form-group mb-6">
       <input type="email" class="form-control block
@@ -136,6 +141,7 @@ const Dash = ({obj,setLoginUser}) => {
       transition
       duration-150
       ease-in-out">Sign up</button>
+       <p>bmi: {bmi}</p>
   </form>
 </div>
 </div>
