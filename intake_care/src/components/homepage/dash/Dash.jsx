@@ -3,6 +3,15 @@ import Navbar from '../navbar/Navbar'
 import './dash.css'
 import { useState } from 'react'
 import Footer from '../../footer/Footer'
+import BMIIMG from '../../../assets/bmi.jpg'
+import CALIMG from '../../../assets/cal2.jpg'
+import PROIMG from '../../../assets/prot.jpg'
+import CARBIMG from '../../../assets/carbs.jpg'
+// import { CCardImage,CCard,CCardBody,CCardTitle,CCardText, CButton} from '@coreui/react';
+// import '@coreui/coreui/dist/css/coreui.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from 'react-bootstrap/Button';
+import  {Card} from 'react-bootstrap';
 const Dash = ({ obj, setLoginUser }) => {
   const [height, setHeight] = useState();
   const [mass, setMass] = useState();
@@ -172,7 +181,62 @@ const Dash = ({ obj, setLoginUser }) => {
           </form>
         </div>
       </div>
-      
+      <div className='stats'>
+      <div className='ml-5'>
+      <Card style={{ width: '15rem' }}>
+  <Card.Img variant="top" src={BMIIMG} />
+  <Card.Body>
+    <Card.Title>BMI</Card.Title>
+    <Card.Text>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </Card.Text>
+    <button className="btn btn-primary">Go somewhere</button>
+  </Card.Body>
+</Card>
+</div>
+
+<div className='ml-5'>
+<Card style={{ width: '15rem' }}>
+  <Card.Img variant="top" src={CALIMG} />
+  <Card.Body>
+    <Card.Title>Calorie Needs</Card.Title>
+    <Card.Text>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </Card.Text>
+    <button className="btn btn-primary">Go somewhere</button>
+  </Card.Body>
+</Card>
+</div>
+
+<Card style={{ width: '15rem' }}>
+  <Card.Img variant="top" src={PROIMG} />
+  <Card.Body>
+    <Card.Title>Protein Needs</Card.Title>
+    <Card.Text>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </Card.Text>
+    <button className="btn btn-primary">Go somewhere</button>
+  </Card.Body>
+</Card>
+<Card style={{ width: '15rem' }}>
+  <Card.Img variant="top" src={CARBIMG} />
+  <Card.Body>
+    <Card.Title>Carbohydrated Needs</Card.Title>
+    <Card.Text>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </Card.Text>
+    <button className="btn btn-primary">Go somewhere</button>
+  </Card.Body>
+</Card>
+
+
+
+    </div>
+
       <Footer/>
     </>
   )

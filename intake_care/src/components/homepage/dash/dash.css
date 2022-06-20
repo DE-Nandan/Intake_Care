@@ -1,6 +1,30 @@
 .Container{
      display: flex;
-     margin-top: 10rem;
+     margin-top: 7rem;
      justify-content: center;
-     align-items: center; 
+     align-items: center;
+     
 }
+.stats{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 2.5rem;
+    margin-top: 3rem;
+    /* justify-content: center;
+    align-items: center; */
+    margin-left: 5rem;
+}
+@media screen and (max-width: 1024px){
+     .stats{
+         grid-template-columns: 1fr 1fr;
+         gap: 1.2rem;
+     }
+ }  
+ /*  Media Queries (Small Devices) */
+  
+ @media screen and (max-width: 600px){
+     .stats{
+         grid-template-columns: 1fr;
+         gap: 1rem;
+     }
+ } 
