@@ -2,24 +2,28 @@ import React from 'react'
 import Navbar from '../navbar/Navbar'
 import './dash.css'
 import { useState } from 'react'
-const Dash = ({obj,setLoginUser}) => {
+import Footer from '../../footer/Footer'
+const Dash = ({ obj, setLoginUser }) => {
   const [height, setHeight] = useState();
   const [mass, setMass] = useState();
   const [bmi, setBmi] = useState();
+  const [age, setAge] = useState();
+  const [gender, setGender] = useState('male');
 
   const calculate = (e) => {
     e.preventDefault();
-    const formValid = +height > 0 && +mass > 0;
+    const formValid = +height > 0 && +mass > 0 && +age > 0;
     if (!formValid) {
+      alert("invalid input")
       return;
     }
-    const bmi = +mass / (+height) ** 2;
+    const bmi = 10000 * (+mass / (+height) ** 2);
     setBmi(bmi);
   };
   return (
     <>
-        <Navbar obj = {obj} setLoginUser = {setLoginUser}/>
-        {/* <div className="App">
+      <Navbar obj={obj} setLoginUser={setLoginUser} />
+      {/* <div className="App">
       <form onSubmit={calculate}>
         <div>
           <label>height in meters</label>
@@ -36,17 +40,17 @@ const Dash = ({obj,setLoginUser}) => {
       <p>bmi: {bmi}</p>
     </div> */}
 
-    <div className="Container">
-    
-    <div class="flex items-center justify-center block p-6 rounded-lg shadow-lg bg-white max-w-md">
-  <form onSubmit={calculate}>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="form-group mb-6">
-      <label>Height:</label>
-        <input  value={height} onChange={(e) => setHeight(e.target.value)}
-        class="form-control
+      <div className="Container">
+
+        <div class="flex items-center justify-center block p-6 rounded-lg shadow-lg bg-white max-w-md">
+          <form onSubmit={calculate}>
+
+            <div class="form-group mb-6">
+              <label>Height:</label>
+              <input value={height} onChange={(e) => setHeight(e.target.value)}
+                class="form-control
           block
-          w-full
+          w-5/6
           px-3
           py-1.5
           text-base
@@ -59,14 +63,14 @@ const Dash = ({obj,setLoginUser}) => {
           ease-in-out
           m-0
           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123"
-          aria-describedby="emailHelp123" placeholder="in m" />
-      </div>
-      <div class="form-group mb-6">
-      <label>Weight:</label>
-        <input  value={mass} onChange={(e) => setMass(e.target.value)}
-        class="form-control
+                aria-describedby="emailHelp123" placeholder="in cms" />
+            </div>
+            <div class="form-group mb-6">
+              <label>Weight:</label>
+              <input value={mass} onChange={(e) => setMass(e.target.value)}
+                class="form-control
           block
-          w-full
+          w-5/6
           px-3
           py-1.5
           text-base
@@ -79,52 +83,75 @@ const Dash = ({obj,setLoginUser}) => {
           ease-in-out
           m-0
           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123"
-          aria-describedby="emailHelp123" placeholder="in Kg" />
-      </div>
-      
-    </div>
-    <div class="form-group mb-6">
-      <input type="email" class="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput125"
-        placeholder="Email address"/>
-    </div>
-    <div class="form-group mb-6">
-      <input type="password" class="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput126"
-        placeholder="Password"/>
-    </div>
-    <div class="form-group form-check text-center mb-6">
-      <input type="checkbox"
-        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
-        id="exampleCheck25" checked/>
-      <label class="form-check-label inline-block text-gray-800" for="exampleCheck25">Subscribe to our newsletter</label>
-    </div>
-    <button type="submit" class="
-      w-full
+                aria-describedby="emailHelp123" placeholder="in Kg" />
+            </div>
+            <div class="form-group mb-6">
+              <label>Age:</label>
+              <input value={age} onChange={(e) => setAge(e.target.value)}
+                class="form-control
+          block
+          w-5/6
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123"
+                aria-describedby="emailHelp123" placeholder="in Yrs" />
+            </div>
+            <div class="form-group mb-6">
+              
+            <label>Gender:</label>
+            <div class="form-check form-check-inline">
+              
+           
+                <input
+                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  name="inlineRadioOptions" 
+                  id="inlineRadio1"
+                  type="radio"
+                  value="male"
+                  checked={gender === 'male'}
+                  onChange={(e) => {
+                    setGender(e.target.value)
+                  }}
+                /> 
+             <label class="form-check-label inline-block text-gray-800" for="inlineRadio10">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  name="inlineRadioOptions" id="inlineRadio2"
+                  type="radio"
+                  value="female"
+                  checked={gender === 'female'}
+                  onChange={(e) => {
+                    setGender(e.target.value)
+                  }}
+                />
+                <label class="form-check-label inline-block text-gray-800" for="inlineRadio20">Female</label>
+
+              </div>
+
+
+             
+            </div>
+
+
+
+            <button 
+            // onClick={() => {
+            //   setGender('');
+            // }} 
+            type="submit"
+              class="
+      w-3/6
       px-6
       py-2.5
       bg-blue-600
@@ -140,12 +167,13 @@ const Dash = ({obj,setLoginUser}) => {
       active:bg-blue-800 active:shadow-lg
       transition
       duration-150
-      ease-in-out">Sign up</button>
-       <p>bmi: {bmi}</p>
-  </form>
-</div>
-</div>
-    
+      ease-in-out">Calculate</button>
+            <p>bmi: {bmi}</p>
+          </form>
+        </div>
+      </div>
+      
+      <Footer/>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import './homepage.css'
 import Navbar from './navbar/Navbar'
+import Footer from '../footer/Footer';
 import Dash from './dash/Dash';
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 
@@ -20,8 +21,8 @@ const Homepage = ({obj ,setLoginUser}) => {
         {/* <Routes>
           <Route path='/dash' element={<Dash />} />
         </Routes> */}
-     
     </div>
+    <Footer/>
     
     </>
   )

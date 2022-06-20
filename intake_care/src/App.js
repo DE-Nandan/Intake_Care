@@ -5,7 +5,7 @@ import Register from './components/register/Register';
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import { useState } from 'react';
 import Dash from './components/homepage/dash/Dash';
-
+import Footer from './components/footer/Footer';
 import Navbar from './components/homepage/navbar/Navbar';
 function App() {
 
