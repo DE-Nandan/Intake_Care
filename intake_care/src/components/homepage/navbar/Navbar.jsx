@@ -4,9 +4,10 @@ import Logo from "../../../assets/favicon.ico"
 import { Link } from "react-router-dom";
 export default function Navbar({obj ,setLoginUser}) {
   const [isOpen, setIsOpen] = useState(false);
+  
   return (
     <div className="Nav">
-      <nav className="bg-neutral-900">
+      <nav className="bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -22,7 +23,8 @@ export default function Navbar({obj ,setLoginUser}) {
                 <p class="text-sky-400 text-lg">Hello,&nbsp;{obj.name}!</p>
                   <Link
                     to="/"
-                    className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
+                   
+                     className=" text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Dashboard
                   </Link>
@@ -31,7 +33,7 @@ export default function Navbar({obj ,setLoginUser}) {
                     to="/dash"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Team
+                    Requirements
                   </Link>
 
                   <a
@@ -141,7 +143,7 @@ export default function Navbar({obj ,setLoginUser}) {
                   to="/dash"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Team
+                  Requirements
                 </Link>
 
                 <a

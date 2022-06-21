@@ -6,7 +6,7 @@ import {IoLogoTwitter} from 'react-icons/io'
 import {AiFillLinkedin} from 'react-icons/ai'
 const Footer = () => {
   return (
-    <footer>
+    <footer className='bg-slate-800'>
       <a href="#" className='footer__logo'>Nandan</a>
       <ul className='permalinks'>
         <li><a href="#">Home</a></li>

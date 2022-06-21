@@ -11,14 +11,32 @@ import CARBIMG from '../../../assets/carbs.jpg'
 // import '@coreui/coreui/dist/css/coreui.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button';
-import  {Card} from 'react-bootstrap';
+import  {Card,Dropdown} from 'react-bootstrap';
+import Select from 'react-select'
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+]
+const getInitialState = () => {
+  const value = "Average Activity";
+  return value;
+};
+
+
 const Dash = ({ obj, setLoginUser }) => {
   const [height, setHeight] = useState();
   const [mass, setMass] = useState();
-  const [bmi, setBmi] = useState();
+  const [bmi, setBmi] = useState(0);
   const [age, setAge] = useState();
   const [gender, setGender] = useState('male');
-
+  const [activity, setActivity] = useState(getInitialState);
+  
+  const handleChange = (e) => {
+    setActivity(e.target.value);
+  };
+  // const activity = options.values
+  // console.log(activity)
   const calculate = (e) => {
     e.preventDefault();
     const formValid = +height > 0 && +mass > 0 && +age > 0;
@@ -26,10 +44,16 @@ const Dash = ({ obj, setLoginUser }) => {
       alert("invalid input")
       return;
     }
-    const bmi = 10000 * (+mass / (+height) ** 2);
+    const bmi = +(10000 * (+mass / (+height) ** 2)).toFixed(2);
     setBmi(bmi);
   };
-  return (
+  
+  
+    
+  
+  
+  
+    return (
     <>
       <Navbar obj={obj} setLoginUser={setLoginUser} />
       {/* <div className="App">
@@ -51,7 +75,7 @@ const Dash = ({ obj, setLoginUser }) => {
 
       <div className="Container">
 
-        <div class="flex items-center justify-center block p-6 rounded-lg shadow-lg bg-white max-w-md">
+        <div class="flex items-center justify-center block p-6 rounded-lg shadow-lg bg-slate-800 max-w-md">
           <form onSubmit={calculate}>
 
             <div class="form-group mb-6">
@@ -121,7 +145,7 @@ const Dash = ({ obj, setLoginUser }) => {
               
            
                 <input
-                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-grey-500 checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   name="inlineRadioOptions" 
                   id="inlineRadio1"
                   type="radio"
@@ -131,11 +155,11 @@ const Dash = ({ obj, setLoginUser }) => {
                     setGender(e.target.value)
                   }}
                 /> 
-             <label class="form-check-label inline-block text-gray-800" for="inlineRadio10">Male</label>
+             <label class="form-check-label inline-block text-white" for="inlineRadio10">Male</label>
               </div>
               <div class="form-check form-check-inline">
                 <input
-                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                  className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-grey-500 checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                   name="inlineRadioOptions" id="inlineRadio2"
                   type="radio"
                   value="female"
@@ -144,7 +168,7 @@ const Dash = ({ obj, setLoginUser }) => {
                     setGender(e.target.value)
                   }}
                 />
-                <label class="form-check-label inline-block text-gray-800" for="inlineRadio20">Female</label>
+                <label class="form-check-label inline-block text-white" for="inlineRadio20">Female</label>
 
               </div>
 
@@ -152,8 +176,25 @@ const Dash = ({ obj, setLoginUser }) => {
              
             </div>
 
+            <div>
+           
+      <div className='flex text-slate-800 gap-4'>
+      <p className='text-white'>Activity:</p>
+      <select value={activity} onChange={(e) => {setActivity(e.target.value);}}>
+        <option value="Average Activity">Average Activity</option>
+        <option value="High Activity">High Activity</option>
+      </select>
+      {/* <p className='text-white'>{activity}</p> */}
+      
+      </div>
+      {/* <p>{activity}</p> */}
+    </div>
+            
 
-
+            {/* <Select options={options}/> */}
+  
+            {/* {activity} */}
+           
             <button 
             // onClick={() => {
             //   setGender('');
@@ -161,6 +202,9 @@ const Dash = ({ obj, setLoginUser }) => {
             type="submit"
               class="
       w-3/6
+      my-4
+      mx-5
+      mb-0
       px-6
       py-2.5
       bg-blue-600
@@ -177,7 +221,7 @@ const Dash = ({ obj, setLoginUser }) => {
       transition
       duration-150
       ease-in-out">Calculate</button>
-            <p>bmi: {bmi}</p>
+            {/* <p>bmi: {bmi}</p> */}
           </form>
         </div>
       </div>
@@ -188,10 +232,39 @@ const Dash = ({ obj, setLoginUser }) => {
   <Card.Body>
     <Card.Title>BMI</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+    Body mass index is a value derived from the mass and height of a person.
     </Card.Text>
-    <button className="btn btn-primary">Go somewhere</button>
+    {(() => {
+        if (bmi === 0) {
+          return (
+            <div><button className="btn btn-secondary disabledD">Fill Your Details Above</button></div>
+          )
+        } else if (bmi <18.5) {
+          return (
+            <div><button className="btn btn-info disabledD">Underweight <br/> BMI: {bmi} </button></div>
+          )
+        } else if(bmi >= 18.5 && bmi <=24.9 ){
+          return (
+            <div><button className="btn btn-success disabledD ml-5">Normal <br/> BMI: {bmi}</button></div>
+          )
+        } else if(bmi > 24.9 && bmi <=29.9 ){
+          return (
+            <div><button className="btn btn-warning disabledD ml-5">Overweight <br/> BMI: {bmi}</button></div>
+          )
+        }
+         else if(bmi > 30.34 && bmi <=34.9 ){
+          return (
+            <div><button className="btn btn-danger disabledD ml-5">Obese <br/> BMI: {bmi}</button></div>
+          )
+        }
+         else {
+          return (
+            <div><button className="btn btn-danger disabledD ml-5">Extremely Obese <br/> BMI: {bmi}</button></div>
+          )
+        }
+      })()}
+   {/* <p className='text-lime-700'>Your BMI :</p>  */}
+    {/* <button className={bmi > 10 ?"btn btn-primary disabledD":""}>{bmi}</button> */}
   </Card.Body>
 </Card>
 </div>
@@ -205,7 +278,7 @@ const Dash = ({ obj, setLoginUser }) => {
       Some quick example text to build on the card title and make up the bulk of
       the card's content.
     </Card.Text>
-    <button className="btn btn-primary">Go somewhere</button>
+    <button className={bmi > 50 ?"btn btn-primary disabledD":""}>Go somewhere</button>
   </Card.Body>
 </Card>
 </div>

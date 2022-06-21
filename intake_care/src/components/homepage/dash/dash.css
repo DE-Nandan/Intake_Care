@@ -3,7 +3,7 @@
      margin-top: 7rem;
      justify-content: center;
      align-items: center;
-     
+     color: white;
 }
 .stats{
     display: grid;
@@ -12,7 +12,11 @@
     margin-top: 3rem;
     /* justify-content: center;
     align-items: center; */
-    margin-left: 5rem;
+    margin-left: 5%;
+}
+.disabledD{
+     pointer-events: none;
+     opacity: 1;
 }
 @media screen and (max-width: 1024px){
      .stats{
@@ -26,5 +30,6 @@
      .stats{
          grid-template-columns: 1fr;
          gap: 1rem;
+         margin-left: 15%;
      }
  } 
