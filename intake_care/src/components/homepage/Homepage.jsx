@@ -17,7 +17,9 @@ const Homepage = ({obj ,setLoginUser}) => {
     {/* </div> */}
     <div>
        {/* <Dash  obj = {obj} setLoginUser = {setLoginUser}/> */}
-    
+    hi
+    <br />
+    lol
         {/* <Routes>
           <Route path='/dash' element={<Dash />} />
         </Routes> */}

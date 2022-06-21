@@ -7,6 +7,7 @@ import BMIIMG from '../../../assets/bmi.jpg'
 import CALIMG from '../../../assets/cal2.jpg'
 import PROIMG from '../../../assets/prot.jpg'
 import CARBIMG from '../../../assets/carbs.jpg'
+import FATSIMG from '../../../assets/fats2.jpg'
 // import { CCardImage,CCard,CCardBody,CCardTitle,CCardText, CButton} from '@coreui/react';
 // import '@coreui/coreui/dist/css/coreui.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -25,6 +26,7 @@ const getInitialState = () => {
 
 
 const Dash = ({ obj, setLoginUser }) => {
+  const [calorie, setCalorie] = useState(0);
   const [height, setHeight] = useState();
   const [mass, setMass] = useState();
   const [bmi, setBmi] = useState(0);
@@ -37,6 +39,7 @@ const Dash = ({ obj, setLoginUser }) => {
   };
   // const activity = options.values
   // console.log(activity)
+  const bee = 0;
   const calculate = (e) => {
     e.preventDefault();
     const formValid = +height > 0 && +mass > 0 && +age > 0;
@@ -46,6 +49,31 @@ const Dash = ({ obj, setLoginUser }) => {
     }
     const bmi = +(10000 * (+mass / (+height) ** 2)).toFixed(2);
     setBmi(bmi);
+
+    
+   console.log(activity)
+   if(activity === 'Average Activity' && gender === "male")
+    { console.log("gr8")
+      const calorie = ((66.5 + 13.8*(mass) + 5*(height) - 6.8*age)*1.2).toFixed(2);
+      setCalorie(calorie);
+    }
+   else if(gender == "male")
+    {const calorie = ((66.5 + 13.8*(mass) + 5*(height) - 6.8*age)*1.5).toFixed(2);
+      setCalorie(calorie);
+    }
+    else if(activity === 'Average Activity')
+    {
+      const calorie = (655.1 + 9.6*(mass) + 1.9*(height) - 4.7*age)*1.2;
+      setCalorie(calorie);
+    }
+    else
+    {
+      const calorie = ((655.1 + 9.6*(mass) + 1.9*(height) - 4.7*age)*1.5).toFixed(2);
+      setCalorie(calorie);
+    }
+   
+     
+    console.log(calorie);
   };
   
   
@@ -73,7 +101,7 @@ const Dash = ({ obj, setLoginUser }) => {
       <p>bmi: {bmi}</p>
     </div> */}
 
-      <div className="Container">
+      <div className="Container bg-slate-300">
 
         <div class="flex items-center justify-center block p-6 rounded-lg shadow-lg bg-slate-800 max-w-md">
           <form onSubmit={calculate}>
@@ -194,7 +222,7 @@ const Dash = ({ obj, setLoginUser }) => {
             {/* <Select options={options}/> */}
   
             {/* {activity} */}
-           
+           {/* {calorie} */}
             <button 
             // onClick={() => {
             //   setGender('');
@@ -220,12 +248,12 @@ const Dash = ({ obj, setLoginUser }) => {
       active:bg-blue-800 active:shadow-lg
       transition
       duration-150
-      ease-in-out">Calculate</button>
+      ease-in-out">Get Results!</button>
             {/* <p>bmi: {bmi}</p> */}
           </form>
         </div>
       </div>
-      <div className='stats'>
+      <div className='stats bg-slate-300'>
       <div className='ml-5'>
       <Card style={{ width: '15rem' }}>
   <Card.Img variant="top" src={BMIIMG} />
@@ -275,39 +303,92 @@ const Dash = ({ obj, setLoginUser }) => {
   <Card.Body>
     <Card.Title>Calorie Needs</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+     Daily calories requiremnt for maintaining weight. 
     </Card.Text>
-    <button className={bmi > 50 ?"btn btn-primary disabledD":""}>Go somewhere</button>
+    {(() => {
+        if (calorie === 0) {
+          return (
+            <div><button className="btn btn-secondary disabledD">Fill Your Details Above</button></div>
+          )
+        } 
+         else {
+          return (
+            <div><button className="btn btn-success disabledD ml-5">Calories: <br/>  {calorie}(cals/day)</button></div>
+          )
+        }
+      })()}
   </Card.Body>
 </Card>
 </div>
-
+<div className='ml-5'>
 <Card style={{ width: '15rem' }}>
   <Card.Img variant="top" src={PROIMG} />
   <Card.Body>
     <Card.Title>Protein Needs</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      Daily Protein requirement
     </Card.Text>
-    <button className="btn btn-primary">Go somewhere</button>
+    {(() => {
+        if (calorie === 0) {
+          return (
+            <div><button className="btn btn-secondary disabledD">Fill Your Details Above</button></div>
+          )
+        } 
+         else {
+          return (
+            <div><button className="btn btn-success disabledD ml-5">Protein: <br/>  {(mass*0.8).toFixed(2)}(g) - {mass}(g)</button></div>
+          )
+        }
+      })()}
   </Card.Body>
 </Card>
+</div>
+<div className='ml-5'>
 <Card style={{ width: '15rem' }}>
   <Card.Img variant="top" src={CARBIMG} />
   <Card.Body>
     <Card.Title>Carbohydrated Needs</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      Carbs needed in a day.
     </Card.Text>
-    <button className="btn btn-primary">Go somewhere</button>
+    {(() => {
+        if (calorie === 0) {
+          return (
+            <div><button className="btn btn-secondary disabledD">Fill Your Details Above</button></div>
+          )
+        } 
+         else {
+          return (
+            <div><button className="btn btn-success disabledD ml-5">Carbohydrates: <br/>  {(calorie*0.6).toFixed(2)}(cals/day)</button></div>
+          )
+        }
+      })()}
   </Card.Body>
 </Card>
-
-
-
+</div>
+<div className='ml-5'>
+<Card style={{ width: '15rem' }}>
+  <Card.Img variant="top" src={FATSIMG} />
+  <Card.Body>
+    <Card.Title>Fats Needs</Card.Title>
+    <Card.Text>
+      Daily Fat Needs
+    </Card.Text>
+    {(() => {
+        if (calorie === 0) {
+          return (
+            <div><button className="btn btn-secondary disabledD">Fill Your Details Above</button></div>
+          )
+        } 
+         else {
+          return (
+            <div><button className="btn btn-success disabledD ml-5">Fats: <br/>  {(calorie*0.3).toFixed(2)}(cals/day)</button></div>
+          )
+        }
+      })()}
+  </Card.Body>
+</Card>
+</div>
     </div>
 
       <Footer/>

@@ -33,7 +33,7 @@ export default function Navbar({obj ,setLoginUser}) {
                     to="/dash"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Requirements
+                    Daily Requirements
                   </Link>
 
                   <a
