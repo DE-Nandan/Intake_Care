@@ -1,10 +1,10 @@
 import React from 'react'
 import './homepage.css'
-import Navbar from './navbar/Navbar'
+import Navbar from '../navbar/Navbar'
 import Footer from '../footer/Footer';
-import Dash from './dash/Dash';
+import Dash from '../daily/Daily';
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
-
+import Testimonials from '../testimonials/Testimonials';
 const Homepage = ({obj ,setLoginUser}) => {
   console.log(obj)
   return (
@@ -17,13 +17,14 @@ const Homepage = ({obj ,setLoginUser}) => {
     {/* </div> */}
     <div>
        {/* <Dash  obj = {obj} setLoginUser = {setLoginUser}/> */}
-    hi
-    <br />
-    lol
+    
+
         {/* <Routes>
           <Route path='/dash' element={<Dash />} />
         </Routes> */}
     </div>
+    
+    <Testimonials/>
     <Footer/>
     
     </>

@@ -52,7 +52,7 @@ const Login = ({setLoginUser}) => {
 //  };
 
   return (
-    <div className="container">
+    <div className="container2">
    
     <div className="login">
         <h2>&copy;Intake Care</h2>

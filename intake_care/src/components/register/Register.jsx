@@ -47,7 +47,7 @@ const Register = () => {
         }
      }
   return (
-    <div className="container">
+    <div className="container2">
     <div className="register">
     {
         console.log("User",user)

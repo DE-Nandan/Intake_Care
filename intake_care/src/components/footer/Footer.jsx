@@ -7,7 +7,7 @@ import {AiFillLinkedin} from 'react-icons/ai'
 const Footer = () => {
   return (
     <footer className='bg-slate-800'>
-      <a href="#" className='footer__logo'>Nandan</a>
+      <a href="#" className='footer__logo'>IntakeCare</a>
       <ul className='permalinks'>
         <li><a href="#">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -24,7 +24,7 @@ const Footer = () => {
       </div>
 
       <div className="footer__copyright">
-        <small>&copy;de_nandan_</small>
+        <small>&copy;IntakeCare</small>
       </div>
     </footer>
   )

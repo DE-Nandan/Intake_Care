@@ -24,7 +24,13 @@ const userSchema = mongoose.Schema({
     password : String
 })
 
+const itemSchema = mongoose.Schema({
+    name : String,
+    calorieValue : String
+})
+
 const User = new mongoose.model("User",userSchema)
+const Item = new mongoose.model("Item",itemSchema)
 
 
 //Routes
@@ -79,6 +85,39 @@ app.post("/register",(req,res) => {
       
    })
    
+})
+
+app.post("/myarea", async (req, res) => {
+    try {
+      const { name, calorieValue } = req.body;
+      const item = new Item({
+        name,
+        calorieValue,
+      });
+  
+      await item.save();
+  
+      // Fetch the updated data and send it back as the response
+      const updatedData = await Item.find();
+      res.status(200).json(updatedData);
+    } catch (error) {
+      console.error("Error saving item:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+
+
+app.get('/myarea',(req,res) =>{
+    Item.find()
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+    
 })
 
 app.listen(9002 , () => {
