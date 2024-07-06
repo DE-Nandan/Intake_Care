@@ -2,11 +2,12 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import Homepage from './components/homepage/Homepage'
 import './index.css'
-import {BrowserRouter} from "react-router-dom"
+import { BrowserRouter } from "react-router-dom"
+import { AuthContextProvider } from './context/AuthContext'
 
 ReactDOM.render(
-<BrowserRouter><App/></BrowserRouter> , 
 
+    <AuthContextProvider><App /></AuthContextProvider>
+    ,
 
-
-document.querySelector("#root"))
+    document.querySelector("#root"))

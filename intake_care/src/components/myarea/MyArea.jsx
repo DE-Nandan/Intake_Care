@@ -2,30 +2,46 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
+import useDelete from '../../hooks/useDelete';
 
-
-// useState is like having a storage box inside a React component. It allows you to keep track of values that can change over time, such as user input or dynamic data. You can easily access and update these values using special functions provided by useState.
-
-// useEffect is like a special helper that watches for specific changes in your component and performs certain actions when those changes happen. It's useful for things like fetching data from a server, updating the page in response to user interactions, or setting up timers. With useEffect, you can make your component aware of what's happening around it and respond accordingly.
-
-const MyArea = ({ obj, setLoginUser }) => {
-  console.log(obj)
+const MyArea = () => {
+  
   const [formData, setFormData] = useState({
     name: '',
-    calorieValue: '',
+    calorie: '',
   });
 
   const [submittedData, setSubmittedData] = useState([]);
+  const [totalCalories, setTotalCalories] = useState(0);
+  const { deleteItem, isDeleting, error } = useDelete();
 
   useEffect(() => {
     // Fetch data from the backend API
     fetchData();
   }, []);
 
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:9002/myarea');
-      setSubmittedData(response.data);
+      const response = await fetch('/home/myarea', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const json = await response.json();
+      setSubmittedData(Array.isArray(json) ? json : []);
+      
+      // Calculate total calories
+      const total = json.reduce((acc, item) => acc + parseFloat(item.calorie), 0);
+      setTotalCalories(total.toFixed(2));
     } catch (error) {
       console.error('Error fetching data', error);
     }
@@ -40,50 +56,116 @@ const MyArea = ({ obj, setLoginUser }) => {
 
     // Send the form data to the backend API
     try {
-      await axios.post('http://localhost:9002/myarea', formData);
-      setFormData({ name: '', calorieValue: '' });
+      const response = await fetch('/home/myarea', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const json = await response.json();
+      setFormData({ name: '', calorie: '' }); // Reset form data
       fetchData(); // Fetch the updated data after successful form submission
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
 
+  const handleDelete = async (id) => {
+    const success = await deleteItem(id, user.token);
+    if (success) {
+      fetchData();
+    } else {
+      console.error('Error deleting item');
+    }
+  };
+
+ 
+
+  
+
   return (
     <div>
-     
-       <Navbar obj={obj} setLoginUser={setLoginUser} />
-       <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Intake Care</span> Your Care.</h1>
-<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime voluptatem est atque quis voluptatum quia consectetur inventore voluptates eos sed!</p>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
+      <Navbar />
+      <h1 className="text-center mb-6 text-1xl font-extrabold text-white md:text-1xl lg:text-4xl">
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600">
+      Keep Check on
+    </span>
+    <span className="text-emerald-700"> Daily Consumption</span>.
+    </h1>
 
-        <label htmlFor="calorieValue">Calorie Value:</label>
-        <input
-          type="text"
-          id="calorieValue"
-          name="calorieValue"
-          value={formData.calorieValue}
-          onChange={handleChange}
-        />
+    <p className="text-lg font-serif font-bold text-sky-800 lg:text-xl mx-4">
+  Keep track of your dietary intake with ease using our food log feature. Simply store the names of your meals along with their calorie values to monitor your nutrition effortlessly. Stay on top of your health goals by logging and reviewing your daily food consumption.
+</p>
 
-        <button type="submit">Submit</button>
-      </form>
 
-      <h2>Submitted Data</h2>
-      <ul>
-        {submittedData.map((item) => (
-          <li key={item._id}>
-            Name: {item.name}, Calorie Value: {item.calorieValue}
-          </li>
-        ))}
-      </ul>
+      <div className="max-w-4xl mx-auto bg-slate-800 p-8 rounded-lg shadow-lg mb-8 mt-4">
+        <h2 className="text-2xl font-bold text-white mb-4">Add New Item</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex flex-col">
+            <label htmlFor="name" className="text-white mb-1">
+              Name:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="px-4 py-2 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring focus:border-blue-500"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label htmlFor="calorie" className="text-white mb-1">
+              Calorie Value:
+            </label>
+            <input
+              type="text"
+              id="calorie"
+              name="calorie"
+              value={formData.calorie}
+              onChange={handleChange}
+              className="px-4 py-2 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring focus:border-blue-500"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-500"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+
+      <div className="max-w-4xl mx-auto bg-slate-800 p-8 rounded-lg shadow-lg mb-3">
+        <h2 className="text-2xl font-bold text-white mb-4">Submitted Data</h2>
+        <ul className="space-y-2">
+          {submittedData.map((item) => (
+            <li key={item._id} className="text-white flex justify-between items-center">
+              <span>Name: {item.name}, Calorie Value: {item.calorie}</span>
+              <button
+                onClick={() => handleDelete(item._id)}
+                className="bg-red-600 text-white py-1 px-2 rounded-lg hover:bg-red-700 focus:outline-none focus:ring focus:border-red-500"
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-4">
+          <p className="text-white">Total Calories: {totalCalories}</p>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import './testimonials.css'
+import './Features.css'
 
 import AVTR1 from '../../assets/calc.png'
 
@@ -43,7 +43,7 @@ const data = [
 ]
 
 
-const Testimonials = () => {
+const Features = () => {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -52,8 +52,17 @@ const Testimonials = () => {
   return (
    
     <section className="testimonialsy">
-   <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Intake Care</span> Your Care.</h1>
-<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime voluptatem est atque quis voluptatum quia consectetur inventore voluptates eos sed!</p>
+   <h1 className="text-center mb-6 text-4xl font-extrabold text-white md:text-5xl lg:text-4xl">
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600">
+      Intake Care
+    </span>
+    <span className="text-emerald-700"> Your Care</span>.
+    
+  </h1>
+  <p className="text-lg font-serif font-bold text-sky-800 lg:text-xl max-w-3xl mx-auto">
+    Welcome to InTake Care! Our website offers a comprehensive suite of health and nutrition tools to help you make informed decisions about your well-being. From interactive charts showing dietary impacts to personalized health insights, explore our features to take charge of 
+    your health journey today. <br/> <br/>  Scroll Slider to Know More.
+  </p>
      <div className="outer">
     <Swiper className="container testimonial__container">
      {
@@ -92,4 +101,4 @@ const Testimonials = () => {
   )
 }
 
-export default Testimonials
+export default Features

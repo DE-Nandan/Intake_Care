@@ -1,8 +1,6 @@
 import React from 'react'
-import Navbar from '../navbar/Navbar'
 import './daily.css'
-import { useState } from 'react'
-import Footer from '../footer/Footer'
+import { useState,useEffect,useRef } from 'react'
 import BMIIMG from '../../assets/bmi.jpg'
 import CALIMG from '../../assets/cal2.jpg'
 import PROIMG from '../../assets/prot.jpg'
@@ -14,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button';
 import  {Card,Dropdown} from 'react-bootstrap';
 import Select from 'react-select'
+import Layout from '../Layout/Layout'
+
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
   { value: 'strawberry', label: 'Strawberry' },
@@ -25,7 +25,7 @@ const getInitialState = () => {
 };
 
 
-const Daily = ({ obj, setLoginUser }) => {
+const Daily = () => {
   const [calorie, setCalorie] = useState(0);
   const [height, setHeight] = useState();
   const [mass, setMass] = useState();
@@ -33,7 +33,9 @@ const Daily = ({ obj, setLoginUser }) => {
   const [age, setAge] = useState();
   const [gender, setGender] = useState('male');
   const [activity, setActivity] = useState(getInitialState);
-  console.log(obj)
+
+
+ 
   const handleChange = (e) => {
     setActivity(e.target.value);
   };
@@ -84,9 +86,25 @@ const Daily = ({ obj, setLoginUser }) => {
     return (
     <>
 
-      <Navbar obj={obj} setLoginUser={setLoginUser} />
-      <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Intake Care</span> Your Care.</h1>
-<p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime voluptatem est atque quis voluptatum quia consectetur inventore voluptates eos sed!</p>
+      <Layout>
+
+      <h1 className="text-center mb-6 text-1xl font-extrabold text-white md:text-1xl lg:text-4xl">
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600">
+      Your Daily
+    </span>
+    <span className="text-emerald-700"> Nutients Requirements</span>.
+    </h1>
+
+    <p className="text-lg font-serif font-bold text-sky-800 lg:text-xl mx-4">
+  Discover your personalized daily requirements with our comprehensive calculator. Whether it's fats, calories, BMI, or protein, get accurate insights tailored to your unique health profile. Empower your health journey with precise and easy-to-understand metrics.
+</p>
+
+
+
+
+
+      
+
       {/* <div className="App">
       <form onSubmit={calculate}>
         <div>
@@ -104,7 +122,7 @@ const Daily = ({ obj, setLoginUser }) => {
       <p>bmi: {bmi}</p>
     </div> */}
 
-      <div className="Container bg-slate-300">
+      <div className="Container">
 
         <div class="flex items-center justify-center block p-6 rounded-lg shadow-lg bg-slate-800 max-w-md">
           <form onSubmit={calculate}>
@@ -394,7 +412,7 @@ const Daily = ({ obj, setLoginUser }) => {
 </div>
     </div>
 
-      <Footer/>
+    </Layout>
     </>
   )
 }

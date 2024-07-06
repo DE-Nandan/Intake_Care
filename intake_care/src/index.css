@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "~leaflet/dist/leaflet.css";
 *{
   margin: 0;
   padding: 0;
@@ -10,23 +11,4 @@
   list-style: none;
   text-decoration: none; 
   
-}
-body {
-  /* background-image: url(../src/assets/bg4.jpg);
-  background-repeat:no-repeat;
-     background-size:contain;
-    background-position:center;   */
-}
-:root {
-  --color-bg :#1183c1;
-  --color-bg-variant : #c9978d;
-  --color-primary : #1f1a19;
-  --color-primary-variant : rgba(228, 80, 75, 0.4);
-  --color-white : rgb(4, 4, 4);
-  --color-black : rgb(255, 255, 255);
-  --color-light : rgba(17, 16, 16, 0.6);
-  --container-width-lg : 75%;
-  --container-width-md : 86%;
-  --container-width-sm : 90%;
-  --transition : all 400ms ease;
 }

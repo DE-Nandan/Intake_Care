@@ -1,68 +1,77 @@
 import React from 'react'
 import './register.css'
 import { useState } from 'react'
-import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import { useSignup } from '../../hooks/useSignup'
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import './register.css'
 const Register = () => {
+  const navigate = useNavigate();
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const {signup, error, isLoading} = useSignup()
+   
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+  
+      await signup(email, password)
+      navigate('/');
+    }
+  
+    return (
+
+        <div className="container3">
+
+<div className="register bg-slate-800 text-white py-8 px-6 rounded-lg shadow-lg max-w-md mx-auto mt-8">
+<h2 className="text-center text-2xl mb-4">&copy; Intake Care</h2>
+      <h1 className="text-center text-3xl mb-4">Register</h1>
+      <input 
+        type="email" 
+        placeholder="Type your email"
+        className="input-field"
+        onChange={(e) => setEmail(e.target.value)} 
+        value={email} 
+      />
+      <input 
+        type="password" 
+        placeholder="Type your Password"
+        className="input-field"
+        onChange={(e) => setPassword(e.target.value)} 
+        value={password} 
+      />
+      <button 
+        className="button bg-green-600 text-white py-2 px-4 mt-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+        disabled={isLoading} 
+        onClick={handleSubmit}
+      >
+        {isLoading ? 'Registering...' : 'Register'}
+      </button>
+      {error && <div className="text-red-500">{error}</div>}
+      <div className="text-center mt-4">
+        <p className="text-gray-300">Already have an account?</p>
+        <Link to="/login" className="text-blue-400 hover:text-blue-300">
+          Login here
+        </Link>
+      </div>
+      <h3 className="text-center mt-4">
+    <a 
+      href="https://de-nandan.github.io/port_react/" 
+      target="_blank" 
+      className="text-gray-300 hover:text-gray-400"
+    >
+      &copy; de_nandan_
+    </a>
+  </h3>
+    </div>
+       
+    </div>
+      
+       
+    )
     
-    const navigate = useNavigate();
-
-    const [user , setUser] = useState({
-        name: "",
-        email:"",
-        password:"",
-        reEnterPassword:""
-    })
-
-    const handleChange = e => {
-        
-        const {name , value} = e.target
-        console.log(name,value);
-        setUser({
-            ...user,
-            [name] : value
-        })
-    }
-
-    const register = () => {
-        const {name ,email ,password,reEnterPassword} = user
-        if(name && email && password && password === reEnterPassword ){
-            // alert("posted")
-             axios.post("http://localhost:9002/register",user)
-             .then(res => {
-                 alert(res.data.message)
-                 navigate("/login")
-                })
-            }
-        else
-        {
-            alert("invalid input")
-        }
-        
-    }
-    const keyPress =e => {
-        if(e.keyCode == 13){
-           console.log('value', e.target.value);
-           register();
-        }
-     }
-  return (
-    <div className="container2">
-    <div className="register">
-    {
-        console.log("User",user)
-    }
-    <h1>Register</h1>
-    <input type="text" name = "name" value = {user.name} placeholder='Type your name' onChange={ handleChange} />
-    <input type="text" name = "email" value = {user.email} placeholder='Type your Email' onChange={handleChange}/>
-    <input type="password" name = "password" value = {user.password} placeholder='Password'onChange={handleChange} />
-    <input type="password" name = "reEnterPassword" value = {user.reEnterPassword} placeholder='Re-enter Password' onChange={handleChange} onKeyDown={keyPress} />
-    <div className="button" onClick={register}>Register</div>
-     <div>or</div>
-     <div className="button" onClick={() => navigate("/login") }>Login</div>
-</div>
-</div>
-  )
+    
+   
 }
 
 export default Register

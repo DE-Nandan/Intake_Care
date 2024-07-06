@@ -2,9 +2,28 @@ import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import Logo from "../../assets/favicon.ico"
 import { Link } from "react-router-dom";
-export default function Navbar({obj ,setLoginUser}) {
+import { useLogout } from "../../hooks/useLogout"
+import { useAuthContext } from '../../hooks/useAuthContext';
+
+
+
+export default function Navbar() {
+
+  const { logout } = useLogout()
+  const { user } = useAuthContext()
+
+
+  const handleClick = () => {
+    logout()
+  }
+
+
+
+
+
+
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
     <div className="Nav">
       <nav className="bg-slate-800">
@@ -19,57 +38,76 @@ export default function Navbar({obj ,setLoginUser}) {
                 />
               </div>
               <div className="hidden md:block">
-                <div className="ml-10 flex items-baseline space-x-4">
-                <p class="text-sky-400 text-lg">Hello,&nbsp;{obj.name}!</p>
-                  <Link
-                    to="/"
-                   
-                     className=" text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Dashboard
-                  </Link>
+  <div className="ml-10 flex items-baseline space-x-4">
+    {/* <p className="text-sky-400 text-lg">Hello!</p> */}
+    <Link
+      to="/"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Dashboard
+    </Link>
 
-                  <Link
-                    to="/daily"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Daily Requirements
-                  </Link>
+    <Link
+      to="/daily"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Daily Requirements
+    </Link>
 
-                  <Link
-                    to="/myarea"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    My Area
-                  </Link>
+    <Link
+      to="/myarea"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      My Area
+    </Link>
+    <Link
+      to="/chat"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Chat
+    </Link>
+    <Link
+      to="/payment"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Payment
+    </Link>
+    <Link
+      to="/map"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Nearby Gym
+    </Link>
+    <Link
+      to="/stats"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Stats
+    </Link>
 
-                 
+  
 
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Calendar
-                  </a>
+    <a
+      href="https://de-nandan.github.io/port_react/"
+       target="_blank"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      About
+    </a>
 
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    About
-                  </a>
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={() => setLoginUser({})}
-                  >
-                    Sign Out
-                  </a>
-                  <div className="text-sky-400 text-lg mx-10 justify-end">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome , Explore Us !!!
-                  </div>
-                
-                </div>
-              </div>
+    <a
+      href="#"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+      onClick={handleClick}
+    >
+      Sign Out
+    </a>
+
+    <div className="ml-auto text-sky-400 text-lg px-10 ">
+      Welcome {user.email}!
+    </div>
+  </div>
+</div>
             </div>
             <div className="-mr-2 flex md:hidden">
               <button
@@ -130,49 +168,69 @@ export default function Navbar({obj ,setLoginUser}) {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <p class="text-sky-400 pl-3">Welcome,&nbsp;{obj.name}!</p>
+                <p class="text-sky-400 pl-3">Welcome,&nbsp;{user.email}!</p>
                 <Link
-                  to ="/"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Dashboard
-                </Link>
-                
+      to="/"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Dashboard
+    </Link>
 
-                <Link
-                  to="/daily"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Requirements
-                </Link>
+    <Link
+      to="/daily"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Daily Requirements
+    </Link>
 
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Projects
-                </a>
+    <Link
+      to="/myarea"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      My Area
+    </Link>
+    <Link
+      to="/chat"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Chat
+    </Link>
+    <Link
+      to="/payment"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Payment
+    </Link>
+    <Link
+      to="/map"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Nearby Gym
+    </Link>
+    <Link
+      to="/stats"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      Stats
+    </Link>
 
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Calendar
-                </a>
+  
 
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  About
-                </a>
-                
-                  <a
-                    href="#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onClick={() => setLoginUser({})}
-                  >
-                    Sign Out
-                  </a>
+    <a
+      href="https://de-nandan.github.io/port_react/"
+       target="_blank"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+    >
+      About
+    </a>
+
+    <a
+      href="#"
+      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+      onClick={handleClick}
+    >
+      Sign Out
+    </a>
               </div>
             </div>
           )}
@@ -190,11 +248,11 @@ export default function Navbar({obj ,setLoginUser}) {
           <div className="px-4 py-6 sm:px-0">
             <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">hi</div>
           </div> */}
-          {/* <!-- /End replace --> */}
-        {/* </div>
+      {/* <!-- /End replace --> */}
+      {/* </div>
       </main> */}
     </div>
-    
+
   );
 }
 
